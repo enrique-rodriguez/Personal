@@ -21,6 +21,7 @@ class SendMessageCommand(Command):
         if not self.address_validator.is_valid(request.address):
             raise InvalidMessageError.address(request.address)
         message = self.make.message(**vars(request))
-        self.message_repo.save(message)
+        self.message_repo.save(vars(message))
+        message.id = self.message_repo.last_insert_id
         self.message_receipt_sender.send(message)
         

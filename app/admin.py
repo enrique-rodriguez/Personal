@@ -23,6 +23,7 @@ model_admins = [
     (models.SkillModel, SkillAdmin),
     (models.ProfileModel, ProfileAdmin),
     (models.SocialLinkModel, SocialLinkAdmin),
+    (models.MessageModel,),
 ]
 
 [admin.site.register(*md) for md in model_admins]

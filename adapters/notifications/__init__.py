@@ -1,2 +1,1 @@
-from .address_validator import address_validator
 from .message_receipt_sender import message_receipt_sender
