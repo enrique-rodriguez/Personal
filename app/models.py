@@ -36,7 +36,7 @@ class ProfileModel(models.Model):
     @classmethod
     def fetch(cls):
         if not cls.objects.count():
-            raise ImproperlyConfigured("Profile does not exists. Create a Profile in the admin site.")
+            return None
         return cls.objects.first()
 
     def __str__(self):

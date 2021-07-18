@@ -14,9 +14,9 @@ class TestProfileModel(TestCase):
     def setUpTestData(cls):
         cls.user = UserModel.objects.create_user(username="username", password="password")
 
-    def test_raises_improperly_configured_if_no_profile_exists(self):
-        with self.assertRaises(ImproperlyConfigured):
-            ProfileModel.fetch()
+    def test_return_none_if_no_profile_exists(self):
+        profile = ProfileModel.fetch()
+        self.assertIsNone(profile)
     
     def test_fetch_returns_the_profile(self):
         profile = ProfileModel.objects.create(user=self.user)
