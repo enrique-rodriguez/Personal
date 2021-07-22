@@ -24,4 +24,5 @@ class SendMessageCommand(Command):
         self.message_repo.save(vars(message))
         message.id = self.message_repo.last_insert_id
         self.message_receipt_sender.send(message)
+        return vars(message)
         

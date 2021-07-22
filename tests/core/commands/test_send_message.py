@@ -69,3 +69,8 @@ class TestSendMessageCommand(TestCase):
         request = self.get_request()
         self.send_message(request)
         self.message_receipt_sender.send.assert_called()
+    
+    def test_returns_dictionary_response(self):
+        request = self.get_request()
+        response = self.send_message(request)
+        assert_that(response).is_type_of(dict)

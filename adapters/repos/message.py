@@ -1,13 +1,6 @@
 from app.models import MessageModel
+from adapters.utils.repo import DjangoRepo
 
 
-class MessageRepo:
+class MessageRepo(DjangoRepo):
     model = MessageModel
-    last_insert_id = None
-
-    def count(self):
-        return self.model.objects.count()
-    
-    def save(self, data):
-        model = self.model.objects.create(**data)
-        self.last_insert_id = model.id

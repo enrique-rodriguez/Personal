@@ -15,5 +15,7 @@ class Message(Entity):
             raise InvalidMessageError.empty_subject()
         if len(body) < self.MIN_MESSAGE_LEN:
             raise InvalidMessageError.short(self.MIN_MESSAGE_LEN)
+        self.name = name
         self.body = body
         self.address = address
+        self.subject = subject
