@@ -2,16 +2,17 @@ from drivers import send_message
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from api.serializers import MessageModelSerializer
 from core.exceptions import InvalidMessageError
 from django.utils.translation import ugettext as _
+from api.serializers import modelserializer_factory
 
 
 class MessageListView(APIView):
-    serializer_class = MessageModelSerializer
+    serializer_class = modelserializer_factory('app.MessageModel')
     error_messages = {
         InvalidMessageError.EMPTY_NAME: _("Sender name must not be empty."),
         InvalidMessageError.EMPTY_BODY: _("Message body must not be empty."),
+        InvalidMessageError.ADDRESS: _("The address '%(address)s' is invalid'."),
         InvalidMessageError.EMPTY_SUBJECT: _("Message subject must not be empty."),
         InvalidMessageError.SHORT: _("Message body must be at least %(min_length)s characters long."),
     }
@@ -33,6 +34,5 @@ class MessageListView(APIView):
     def handle_invalid_message(self, error):
         self.data = {"error": error.reason, "detail": self.error_messages[error.reason] % error.kwargs}
         self.status = status.HTTP_400_BAD_REQUEST
-
 
 list = MessageListView.as_view()

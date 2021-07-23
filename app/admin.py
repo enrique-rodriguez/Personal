@@ -18,12 +18,14 @@ class SocialLinkAdmin(admin.ModelAdmin):
 class SkillAdmin(admin.ModelAdmin):
     list_display = ('name', 'profile')
 
+class MessageAdmin(admin.ModelAdmin):
+    list_display = ('name', 'address', 'subject', 'body')
 
 model_admins = [
     (models.SkillModel, SkillAdmin),
     (models.ProfileModel, ProfileAdmin),
     (models.SocialLinkModel, SocialLinkAdmin),
-    (models.MessageModel,),
+    (models.MessageModel, MessageAdmin),
 ]
 
 [admin.site.register(*md) for md in model_admins]

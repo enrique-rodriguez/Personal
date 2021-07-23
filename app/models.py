@@ -63,7 +63,7 @@ class MessageModel(models.Model):
     class Meta:
         verbose_name = _("Message")
         verbose_name_plural = _("Messages")
-    name = models.CharField(verbose_name=_("Name"), max_length=50)
-    address = models.EmailField(verbose_name=_("Email"))
-    subject = models.CharField(verbose_name=_("Subject"), max_length=50)
-    body = models.CharField(verbose_name=_("Body"), max_length=1000)
+    name = models.CharField(verbose_name=_("Name"), blank=True, max_length=50)
+    address = models.CharField(verbose_name=_("Email"), blank=True, max_length=254)
+    subject = models.CharField(verbose_name=_("Subject"), blank=True, max_length=50)
+    body = models.CharField(verbose_name=_("Body"), blank=True, max_length=1000)

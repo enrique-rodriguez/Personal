@@ -1,18 +1,19 @@
 {% load i18n %}
-<form action="" method="POST" role="form" class="email-form mt-4">
+<form action="{% url 'api:messages' %}" method="POST" role="form" class="email-form mt-4">
+  {% csrf_token %}
     <div class="row">
       <div class="col-md-6 form-group">
-        <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
+        <input value="Enrique Rodriguez" type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
       </div>
       <div class="col-md-6 form-group mt-3 mt-md-0">
-        <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
+        <input value="enrique.rodriguez9@upr.edu" type="email" class="form-control" name="address" id="address" placeholder="Your Email" required>
       </div>
     </div>
     <div class="form-group mt-3">
-      <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
+      <input value="subject" type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
     </div>
     <div class="form-group mt-3">
-      <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
+      <textarea class="form-control" name="body" rows="5" placeholder="Message" required>this is the message body</textarea>
     </div>
     <div class="my-3">
       <div class="loading">Loading</div>

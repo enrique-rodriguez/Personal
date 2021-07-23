@@ -29,4 +29,4 @@ class InvalidMessageError(Exception):
     
     @classmethod
     def address(cls, address):
-        return cls(cls.ADDRESS)
+        return cls(cls.ADDRESS, address=address)
