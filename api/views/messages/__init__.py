@@ -1,1 +1,1 @@
-from .list import list
+from .list_view import list

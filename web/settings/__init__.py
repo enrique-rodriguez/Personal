@@ -132,3 +132,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 SITE_ID = 1
 
+CAPTCHA_SECRET = "6LcVh7cbAAAAAGtxj-Xz_5SGanaQ-IurRnwZTEnx"
