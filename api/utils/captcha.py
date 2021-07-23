@@ -6,7 +6,6 @@ from django.core.exceptions import ImproperlyConfigured
 CAPTCHA_VERIFY_URL = "https://www.google.com/recaptcha/api/siteverify"
 
 
-
 def is_valid_captcha(token, captcha_secret=None):
     captcha_secret = captcha_secret or get_captcha_secret()
     response = requests.post(CAPTCHA_VERIFY_URL, {

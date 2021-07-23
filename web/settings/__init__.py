@@ -132,4 +132,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 SITE_ID = 1
 
-CAPTCHA_SECRET = os.environ.get("CAPTCHA_SECRET", "6LcVh7cbAAAAAGtxj-Xz_5SGanaQ-IurRnwZTEnx")
+CAPTCHA_SITE_KEY = "6Lf3ybcbAAAAAOeAQ1ip1HVCXXpAzNj80lUIg9Qe"
+
+CAPTCHA_SECRET = os.environ.get("CAPTCHA_SECRET")
