@@ -2,12 +2,13 @@ from unittest import TestCase
 from unittest.mock import Mock
 from assertpy import assert_that
 from core.commands import SendMessageCommand
-from core.exceptions import InvalidMessageError
+from core.exceptions import InvalidMessageError, TooManyMessagesError
 
 
 class TestSendMessageCommand(TestCase):
 
     def setUp(self):
+        self.moderator = Mock()
         self.message_repo = Mock()
         self.address_validator = Mock()
         self.message_receipt_sender = Mock()
@@ -17,7 +18,8 @@ class TestSendMessageCommand(TestCase):
         return SendMessageCommand(
             message_repo=self.message_repo,
             address_validator=self.address_validator,
-            message_receipt_sender=self.message_receipt_sender
+            message_receipt_sender=self.message_receipt_sender,
+            moderator=self.moderator
         )
     
     def get_request(self, **kwargs):
@@ -59,6 +61,12 @@ class TestSendMessageCommand(TestCase):
     def test_message_body_to_small_raises_invalid_message(self):
         request = self.get_request(body='short message')
         self.assertInvalidMessage(request, InvalidMessageError.SHORT)
+    
+    def test_too_many_messages_raises_error(self):
+        self.moderator.is_under_send_limit.return_value = False
+        request = self.get_request()
+        with self.assertRaises(TooManyMessagesError):
+            self.send_message(request)
     
     def test_message_saved(self):
         request = self.get_request()

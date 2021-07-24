@@ -1,6 +1,7 @@
 from django.db import models
 from datetime import date
 from django.utils.translation import ugettext_lazy as _
+from django.utils import timezone
 from django.contrib.auth import get_user_model
 
 UserModel = get_user_model()
@@ -67,3 +68,15 @@ class MessageModel(models.Model):
     address = models.CharField(verbose_name=_("Email"), blank=True, max_length=254)
     subject = models.CharField(verbose_name=_("Subject"), blank=True, max_length=50)
     body = models.CharField(verbose_name=_("Body"), blank=True, max_length=1000)
+    created = models.DateTimeField(verbose_name=_("Created"), default=timezone.now)
+
+
+class SettingsModel(models.Model):
+    send_message_limit = models.IntegerField(verbose_name=_("Daily message limit per email address."), default=3)
+
+    @classmethod
+    def get(cls):
+        model = cls.objects.first()
+        if not model:
+            model = cls.objects.create()
+        return model

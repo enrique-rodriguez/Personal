@@ -14,3 +14,4 @@ class TestMessageModel(TestCase):
         self.assertEqual(MessageModel._meta.get_field("body").verbose_name, _("Body"))
         self.assertEqual(MessageModel._meta.get_field("address").verbose_name, _("Email"))
         self.assertEqual(MessageModel._meta.get_field("subject").verbose_name, _("Subject"))
+        self.assertEqual(MessageModel._meta.get_field("created").verbose_name, _("Created"))

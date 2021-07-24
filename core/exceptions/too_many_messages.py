@@ -1,0 +1,4 @@
+
+
+class TooManyMessagesError(Exception):
+    pass

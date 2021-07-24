@@ -21,11 +21,15 @@ class SkillAdmin(admin.ModelAdmin):
 class MessageAdmin(admin.ModelAdmin):
     list_display = ('name', 'address', 'subject', 'body')
 
+class SettingsAdmin(SingleObjectAddPermissionMixin, admin.ModelAdmin):
+    list_display = ('send_message_limit',)
+
 model_admins = [
     (models.SkillModel, SkillAdmin),
     (models.ProfileModel, ProfileAdmin),
     (models.SocialLinkModel, SocialLinkAdmin),
     (models.MessageModel, MessageAdmin),
+    (models.SettingsModel, SettingsAdmin)
 ]
 
 [admin.site.register(*md) for md in model_admins]

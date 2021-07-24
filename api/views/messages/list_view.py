@@ -1,11 +1,14 @@
+from django.conf import settings
 from drivers import send_message
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from app.models import SettingsModel
+from api.utils.captcha import is_valid_captcha
 from core.exceptions import InvalidMessageError
 from django.utils.translation import ugettext as _
 from api.serializers import modelserializer_factory
-from api.utils.captcha import is_valid_captcha
+from app import settings
 
 
 class MessageListView(APIView):
@@ -33,7 +36,7 @@ class MessageListView(APIView):
     
     def send_message(self, data):
         try:
-            self.data = send_message(data)
+            self.data = send_message(data, send_limit=settings.get('send_message_limit'))
         except InvalidMessageError as error:
             self.handle_invalid_message(error)
         else:
